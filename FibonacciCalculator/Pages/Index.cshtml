@@ -1,0 +1,100 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div claas="container-fluid d-fliex">
+    <div class="col"></div>
+
+    <div class="col-7">
+        <h1 class="display-4">Experimenting with Fibonacci</h1>
+        <p>
+            Welcome! This is an example website for calculating the nth position in the Fibonacci Series
+        </p>
+        <p>
+            Given that:
+            <ol type="1">
+                <li>F<sub>0</sub> = 0<br />
+                <li>F<sub>1</sub> = 1<br />
+                <li>F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub>
+            </ol>
+        </p>
+
+        <p>
+            Which position in the series do you want to calculate?
+        </p>
+
+        <form class="form-inline" method="post">
+            <input type="number" class="form-control mb-2 mr-sm-2" name="position" placeholder="position"/>
+            <button type="submit" class="btn btn-primary mb-2" name="calculate">CalculateAsync!</button>
+        </form>
+    </div>
+    
+    @if (@Model.HasResult)
+    { 
+        <div style="margin-top: 25px;">
+            <p>
+                And we have a result! The value of F<sub>@Model.Position</sub> = @Model.Result
+            </p>
+            <p>
+                This value was calculated twice. Once using a recursive algorithm and once using a lineair algorithm
+            </p>
+            <h3>Last experiment results</h3>
+            <table class="table">
+                <tr>
+                    <td>Recursive duration</td>
+                    <td>@Model.LastResults.RecursiveDuration</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Lineair duration</td>
+                    <td>@Model.LastResults.LineairDuration</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Same outcome</td>
+                    <td>@(Model.LastResults.HasErrors ? "Yes" : "No")</td>
+                    <td></td>
+                </tr>
+            </table>
+            <h3>Combined results</h3>
+            <table class="table">
+                <tr>
+                    <td>Total number of experiments</td>
+                    <td>@Model.OverallResults.ExperimentsCount</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Number of failed experiments </td>
+                    <td>@Model.OverallResults.ExperimentsFailed</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Average recursive algorithm duration</td>
+                    <td>@Model.OverallResults.RecursiveDurationStatistics.Average</td>
+                </tr>
+                <tr>
+                    <td>Minimum recursive algorithm duration</td>
+                    <td>@Model.OverallResults.RecursiveDurationStatistics.Minimum</td>
+                </tr>
+                <tr>
+                    <td>Maximum recursive algorithm duration</td>
+                    <td>@Model.OverallResults.RecursiveDurationStatistics.Maximum</td>
+                </tr>
+                <tr>
+                    <td>Average lineair algorithm duration : </td>
+                    <td>@Model.OverallResults.LineairDurationStatistics.Average</td>
+                </tr>
+                <tr>
+                    <td>Minimum lineair algorithm duration</td>
+                    <td>@Model.OverallResults.LineairDurationStatistics.Minimum</td>
+                </tr>
+                <tr>
+                    <td>Maximum lineair algorithm duration</td>
+                    <td>@Model.OverallResults.LineairDurationStatistics.Maximum</td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>
