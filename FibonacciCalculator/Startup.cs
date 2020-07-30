@@ -29,7 +29,6 @@ namespace FibonacciCalculator
 
             var resultsPublisher = new ExperimentResultPublisher();
             Scientist.ResultPublisher = resultsPublisher;
-            ;
 
             services
                 .AddTransient<IRecursiveFibonacciCalculator, RecursiveFibonacciCalculator>()
